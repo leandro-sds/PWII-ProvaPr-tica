@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <ui:composition template="/WEB-INF/template/template.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:column span="12">
+                        <h:form style="padding-top: 25px;"> 
+                            <h:panelGrid columns="2" cellpadding="5px" cellspacing="10px" width="50%">
+                                <h:outputText value="Titulo:" />  
+                                <b:inputText value="#{usuarioBean.login}"/>
+
+                                <h:outputText value="Autor(es):" />  
+                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+
+                                <h:outputText value="Editora:" />  
+                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+
+                                <h:outputText value="Ano de publicação:" />  
+                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+
+                                <h:outputText value="Cidade:" />  
+                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+
+                                <h:outputText value="Assunto: " />  
+                                <b:selectOneMenu value="#{usuarioBean.tipo}">
+                                    <f:selectItem itemLabel="(Selecione um tipo)" itemValue="" />
+                                    <f:selectItem itemLabel="Administrador" itemValue="1" />
+                                    <f:selectItem itemLabel="Garçon" itemValue="2" />
+                                </b:selectOneMenu>
+
+                                <h:outputText value="Tipo: " />  
+                                <b:selectOneMenu value="#{usuarioBean.tipo}">
+                                    <f:selectItem itemLabel="(Selecione um tipo)" itemValue="" />
+                                    <f:selectItem itemLabel="Administrador" itemValue="1" />
+                                    <f:selectItem itemLabel="Garçon" itemValue="2" />
+                                </b:selectOneMenu>
+
+                                <h:outputText value="Resumo:" />
+                                <b:inputTextarea  />
+                            </h:panelGrid>
+                            
+                            <b:commandButton value="Cadastrar" action="#{usuarioBean.cadastrar()}" />
+                        </h:form>
+                    </b:column>
+                </b:row>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
