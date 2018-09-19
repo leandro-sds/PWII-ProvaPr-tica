@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Livraria</title>
     </h:head>
     <h:body style="padding-top: 50px; padding-bottom: 20px;">
         <ui:composition template="/WEB-INF/template/template.xhtml">
@@ -15,42 +15,51 @@
                     <b:column span="12">
                         <h:form style="padding-top: 25px;"> 
                             <h:panelGrid columns="2" cellpadding="5px" cellspacing="10px" width="50%">
-                                <h:outputText value="Titulo:" />  
-                                <b:inputText value="#{usuarioBean.login}"/>
+                                <h:outputText value="#{bundle.title}" />  
+                                <b:inputText value="#{livroBean.titulo}" />
 
-                                <h:outputText value="Autor(es):" />  
-                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+                                <h:outputText value="#{bundle.authors}" />  
+                                <b:inputText value="#{livroBean.autores}" />
 
-                                <h:outputText value="Editora:" />  
-                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+                                <h:outputText value="#{bundle.publisher}" />  
+                                <b:inputText value="#{livroBean.editora}" />
 
-                                <h:outputText value="Ano de publicação:" />  
-                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+                                <h:outputText value="#{bundle.year}" />  
+                                <b:inputText value="#{livroBean.ano}" />
 
-                                <h:outputText value="Cidade:" />  
-                                <b:inputText value="#{usuarioBean.senha}" type="password"/>
+                                <h:outputText value="#{bundle.city}" />  
+                                <b:inputText value="#{livroBean.cidade}" />
 
-                                <h:outputText value="Assunto: " />  
-                                <b:selectOneMenu value="#{usuarioBean.tipo}">
-                                    <f:selectItem itemLabel="(Selecione um tipo)" itemValue="" />
-                                    <f:selectItem itemLabel="Administrador" itemValue="1" />
-                                    <f:selectItem itemLabel="Garçon" itemValue="2" />
+                                <h:outputText value="#{bundle.about}" />  
+                                <b:selectOneMenu value="#{livroBean.assuntoid}">
+                                    <f:selectItems value="#{livroBean.assuntoIDList}" var="Assunto" itemValue="#{Assunto.id}" itemLabel="#{Assunto.informacao}" />
                                 </b:selectOneMenu>
 
-                                <h:outputText value="Tipo: " />  
-                                <b:selectOneMenu value="#{usuarioBean.tipo}">
-                                    <f:selectItem itemLabel="(Selecione um tipo)" itemValue="" />
-                                    <f:selectItem itemLabel="Administrador" itemValue="1" />
-                                    <f:selectItem itemLabel="Garçon" itemValue="2" />
+                                <h:outputText value="#{bundle.type}" />  
+                                <b:selectOneMenu value="#{livroBean.tipoid}">
+                                    <f:selectItems value="#{livroBean.tipoidList}" var="Tipo" itemValue="#{Tipo.id}" itemLabel="#{Tipo.descricao}" />
                                 </b:selectOneMenu>
 
-                                <h:outputText value="Resumo:" />
-                                <b:inputTextarea  />
+                                <h:outputText value="#{bundle.summary}" />
+                                <b:inputTextarea value="#{livroBean.resumo}" />
                             </h:panelGrid>
-                            
-                            <b:commandButton value="Cadastrar" action="#{usuarioBean.cadastrar()}" />
+
+                            <b:commandButton value="#{bundle.add}" action="#{livroBean.Cadastrar()}" />
                         </h:form>
                     </b:column>
+                </b:row>
+
+                <b:row>
+                    <hr style="width: 100%"></hr>
+
+                    <h:form>
+                        <b:dataTable value="#{livroBean.livrolist}" var="livro" columnVisibility="true" >
+                            <b:dataTableColumn value="#{livro.id[0]}" order="asc" dataType="string"/>
+                            <b:dataTableColumn value="#{livro.titulo}" />
+                            <b:dataTableColumn value="#{livro.autor}" />
+                            <b:dataTableColumn value="#{livro.ano}" />
+                        </b:dataTable>
+                    </h:form>
                 </b:row>
             </ui:define>
         </ui:composition>

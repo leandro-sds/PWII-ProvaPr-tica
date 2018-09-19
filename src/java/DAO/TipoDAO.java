@@ -6,11 +6,17 @@
 package DAO;
 
 import Entity.Tipo;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author leand
  */
 public class TipoDAO extends GenericDAO<Tipo> {
+    private EntityManager em = daoHelper.getEM();
     
+    public List<Tipo> getTipoList() {
+        return em.createNamedQuery("Tipo.findAll").getResultList();
+    }
 }

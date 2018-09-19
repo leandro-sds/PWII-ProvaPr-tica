@@ -14,14 +14,14 @@
                     <b:column span="12">
                         <h:form style="padding-top: 25px;"> 
                             <h:panelGrid columns="2" cellpadding="5px" cellspacing="10px" width="50%">
-                                <h:outputText value="Informação" />  
+                                <h:outputText value="#{bundle.info}" />  
                                 <b:inputText value="#{assuntoBean.informacao}"/>
 
-                                <h:outputText value="Observação" />  
+                                <h:outputText value="#{bundle.obs}" />  
                                 <b:inputText value="#{assuntoBean.observacao}" />
                             </h:panelGrid>
                             
-                            <b:commandButton value="Cadastrar" action="#{assuntoBean.Cadastrar()}" />
+                            <b:commandButton value="#{bundle.add}" action="#{assuntoBean.Cadastrar()}" />
                         </h:form>
                     </b:column>
                 </b:row>

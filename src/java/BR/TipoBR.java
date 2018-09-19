@@ -7,6 +7,8 @@ package BR;
 
 import DAO.TipoDAO;
 import Entity.Tipo;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,5 +32,10 @@ public class TipoBR {
         }
         
         return url;
+    }
+    
+    public List<Tipo> getTipoList() {
+        tipoDAO = new TipoDAO();
+        return tipoDAO.getTipoList();
     }
 }

@@ -6,9 +6,7 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -53,8 +49,6 @@ public class Assunto implements GenericEntity {
     @Size(min = 1, max = 45)
     @Column(name = "Observacao")
     private String observacao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assuntoID")
-    private Collection<Livro> livroCollection;
 
     public Assunto() {
     }
@@ -96,15 +90,6 @@ public class Assunto implements GenericEntity {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
-    }
-
-    @XmlTransient
-    public Collection<Livro> getLivroCollection() {
-        return livroCollection;
-    }
-
-    public void setLivroCollection(Collection<Livro> livroCollection) {
-        this.livroCollection = livroCollection;
     }
 
     @Override

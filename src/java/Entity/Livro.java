@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,10 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Livro.findById", query = "SELECT l FROM Livro l WHERE l.id = :id")
     , @NamedQuery(name = "Livro.findByTitulo", query = "SELECT l FROM Livro l WHERE l.titulo = :titulo")
     , @NamedQuery(name = "Livro.findByAutores", query = "SELECT l FROM Livro l WHERE l.autores = :autores")
+    , @NamedQuery(name = "Livro.findByEditora", query = "SELECT l FROM Livro l WHERE l.editora = :editora")
     , @NamedQuery(name = "Livro.findByAno", query = "SELECT l FROM Livro l WHERE l.ano = :ano")
     , @NamedQuery(name = "Livro.findByCidade", query = "SELECT l FROM Livro l WHERE l.cidade = :cidade")
-    , @NamedQuery(name = "Livro.findByResumo", query = "SELECT l FROM Livro l WHERE l.resumo = :resumo")})
-public class Livro implements Serializable {
+    , @NamedQuery(name = "Livro.findByResumo", query = "SELECT l FROM Livro l WHERE l.resumo = :resumo")
+    , @NamedQuery(name = "Livro.findByTipoID", query = "SELECT l FROM Livro l WHERE l.tipoID = :tipoID")
+    , @NamedQuery(name = "Livro.findByAssuntoID", query = "SELECT l FROM Livro l WHERE l.assuntoID = :assuntoID")})
+public class Livro implements GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,6 +58,11 @@ public class Livro implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
+    @Column(name = "Editora")
+    private String editora;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Ano")
     private String ano;
     @Basic(optional = false)
@@ -69,12 +75,14 @@ public class Livro implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "Resumo")
     private String resumo;
-    @JoinColumn(name = "AssuntoID", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Assunto assuntoID;
-    @JoinColumn(name = "TipoID", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Tipo tipoID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "TipoID")
+    private int tipoID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "AssuntoID")
+    private int assuntoID;
 
     public Livro() {
     }
@@ -82,14 +90,28 @@ public class Livro implements Serializable {
     public Livro(Integer id) {
         this.id = id;
     }
-
-    public Livro(Integer id, String titulo, String autores, String ano, String cidade, String resumo) {
-        this.id = id;
+    
+    public Livro(String titulo, String autores, String editora, String ano, String cidade, String resumo, int tipoID, int assuntoID) {
         this.titulo = titulo;
         this.autores = autores;
+        this.editora = editora;
         this.ano = ano;
         this.cidade = cidade;
         this.resumo = resumo;
+        this.tipoID = tipoID;
+        this.assuntoID = assuntoID;
+    }
+
+    public Livro(Integer id, String titulo, String autores, String editora, String ano, String cidade, String resumo, int tipoID, int assuntoID) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autores = autores;
+        this.editora = editora;
+        this.ano = ano;
+        this.cidade = cidade;
+        this.resumo = resumo;
+        this.tipoID = tipoID;
+        this.assuntoID = assuntoID;
     }
 
     public Integer getId() {
@@ -116,6 +138,14 @@ public class Livro implements Serializable {
         this.autores = autores;
     }
 
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
     public String getAno() {
         return ano;
     }
@@ -140,20 +170,20 @@ public class Livro implements Serializable {
         this.resumo = resumo;
     }
 
-    public Assunto getAssuntoID() {
-        return assuntoID;
-    }
-
-    public void setAssuntoID(Assunto assuntoID) {
-        this.assuntoID = assuntoID;
-    }
-
-    public Tipo getTipoID() {
+    public int getTipoID() {
         return tipoID;
     }
 
-    public void setTipoID(Tipo tipoID) {
+    public void setTipoID(int tipoID) {
         this.tipoID = tipoID;
+    }
+
+    public int getAssuntoID() {
+        return assuntoID;
+    }
+
+    public void setAssuntoID(int assuntoID) {
+        this.assuntoID = assuntoID;
     }
 
     @Override
@@ -178,7 +208,7 @@ public class Livro implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Livro[ id=" + id + " ]";
+        return "BR.Livro[ id=" + id + " ]";
     }
     
 }

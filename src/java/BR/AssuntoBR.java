@@ -7,13 +7,13 @@ package BR;
 
 import DAO.AssuntoDAO;
 import Entity.Assunto;
+import java.util.List;
 
 /**
  *
  * @author leand
  */
 public class AssuntoBR {
-
     private Assunto assunto;
     private AssuntoDAO assuntoDAO;
 
@@ -29,5 +29,10 @@ public class AssuntoBR {
             url = "/index";
         }
         return url;
+    }
+    
+    public List<Assunto> getLista() {
+        assuntoDAO = new AssuntoDAO();
+        return assuntoDAO.getLista();
     }
 }

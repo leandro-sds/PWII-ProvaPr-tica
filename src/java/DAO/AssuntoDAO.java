@@ -6,11 +6,17 @@
 package DAO;
 
 import Entity.Assunto;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author leand
  */
 public class AssuntoDAO extends GenericDAO<Assunto>{
+    private EntityManager em = daoHelper.getEM();
     
+    public List<Assunto> getLista() {
+        return em.createNamedQuery("Assunto.findAll").getResultList();
+    }
 }
