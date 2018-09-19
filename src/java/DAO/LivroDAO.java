@@ -24,9 +24,9 @@ public class LivroDAO extends GenericDAO<Livro>{
     
     public List<Livro> getLivroList() {
         EntityManager em = daoHelper.getEM();
-        List<Livro> livros = null;
+        List<Livro> livros;
         
-        Query query = em.createQuery("SELECT l.id, l.titulo, l.autores, l.ano FROM Livro l", Livro.class);
+        Query query = em.createNamedQuery("Livro.findAll", Livro.class);
         livros = query.getResultList();
         
         return livros;

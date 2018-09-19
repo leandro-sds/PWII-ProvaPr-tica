@@ -54,9 +54,9 @@
 
                     <h:form>
                         <b:dataTable value="#{livroBean.livrolist}" var="livro" columnVisibility="true" >
-                            <b:dataTableColumn value="#{livro.id[0]}" order="asc" dataType="string"/>
+                            <b:dataTableColumn value="#{livro.id}" order="asc" />
                             <b:dataTableColumn value="#{livro.titulo}" />
-                            <b:dataTableColumn value="#{livro.autor}" />
+                            <b:dataTableColumn value="#{livro.autores}" />
                             <b:dataTableColumn value="#{livro.ano}" />
                         </b:dataTable>
                     </h:form>
